@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "docker-compose up --build dev",
     "prod": "docker-compose up --build prod",
+    "build": "docker-compose build prod",
     "start": "nodemon src/index.js"
   }
 }
