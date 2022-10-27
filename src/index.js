@@ -7,13 +7,13 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const port = 80;
 const app = express();
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-client.connect(err => {
-  if (err) throw err;
-  console.log("Successfully Connected to the database")
-});
-const db = client.db("mydb");
+// client.connect(err => {
+//   if (err) throw err;
+//   console.log("Successfully Connected to the database")
+// });
+// const db = client.db("mydb");
 
 app.use(express.json());
    
@@ -30,35 +30,35 @@ app.get("/", (req, res) => {
   return res.redirect("index.html");
 });
    
-app.post("/formFillUp", (req, res) => {
-  var name = req.body.name;
-  var reason = req.body.reason;
-  var email = req.body.email;
-  var phone = req.body.phone;
-  var city = req.body.city;
-  var state = req.body.state;
-  var addressline = req.body.addressline;
+// app.post("/formFillUp", (req, res) => {
+//   var name = req.body.name;
+//   var reason = req.body.reason;
+//   var email = req.body.email;
+//   var phone = req.body.phone;
+//   var city = req.body.city;
+//   var state = req.body.state;
+//   var addressline = req.body.addressline;
    
-  var data = {
-    name: name,
-    reason: reason,
-    email: email,
-    phone: phone,
-    city: city,
-    state: state,
-    addressline: addressline,
-  };
+//   var data = {
+//     name: name,
+//     reason: reason,
+//     email: email,
+//     phone: phone,
+//     city: city,
+//     state: state,
+//     addressline: addressline,
+//   };
    
-  db.collection("users").insertOne(
-  data, (err, collection) => {
-    if (err) {
-      throw err;
-    }
-    console.log("Data inserted successfully!");
-  });
+//   db.collection("users").insertOne(
+//   data, (err, collection) => {
+//     if (err) {
+//       throw err;
+//     }
+//     console.log("Data inserted successfully!");
+//   });
    
-  return res.redirect("formSubmitted.html");
-});
+//   return res.redirect("formSubmitted.html");
+// });
    
 app.listen(port, () => {
   console.log(`The application started 
