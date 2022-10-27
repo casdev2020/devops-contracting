@@ -1,0 +1,18 @@
+{
+  "name": "devops-contracting",
+  "packageManager": "yarn@3.2.4",
+  "volta": {
+    "node": "16.0.0",
+    "yarn": "3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "dev": "docker-compose up --build dev",
+    "prod": "docker-compose up --build prod",
+    "start": "nodemon src/index.js"
+  }
+}
