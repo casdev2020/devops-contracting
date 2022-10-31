@@ -1,0 +1,80 @@
+org: gratefulheron
+console: true
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+frameworkVersion: '3'
+
+service: MyCV
+provider:
+  name: aws
+  runtime: nodejs16.x
+  # stage: dev
+  region: us-east-1
+  memorySize: 256
+  tags:
+    Name: MyCV
+    Owner: Charlie
+  stackTags:
+    Project: MyCV
+    Owner: Charlie
+
+  # tracing:
+  #     # Can only be true if API Gateway is inside a stack.
+  #     apiGateway: true
+  #     # Optional, can be true (true equals 'Active'), 'Active' or 'PassThrough'
+  #     lambda: true
+# plugins:
+#   - serverless-offline
+#   - serverless-apigw-binary
+#   - serverless-aws-static-file-handler
+
+# package:
+  # patterns:
+  #   - "public/**"
+  #   - "!node_modules/**"
+# custom:
+#   apigwBinary:
+#     types:
+#       - 'image/jpeg'
+#       - 'image/png'
+#       - 'application/font-sfnt'
+# stackName: sample-app
+# layers:
+#   public:
+#     path: public # required, path to layer contents on disk
+#     name: ${sls:stage}-public # optional, Deployed Lambda layer name
+#     description: Description of what the lambda layer does # optional, Description to publish to AWS
+#     retain: false 
+  # node_modules:
+  #   path: node_modules
+  #   name: ${sls:stage}-node-modules-frontend
+  #   retain: true
+
+functions:
+  app:
+    # package:
+    #   artifact: .serverless/app.zip
+    # url: true
+    handler: app/app.handler
+    logRetentionInDays: 14
+    # layers:
+      # - arn:aws:lambda:us-east-1:545999353886:layer:${sls:stage}-public:$LATEST
+      # - arn:aws:lambda:us-east-1:545999353886:layer:dev-node-modules-frontend:3
+
+    events: 
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+# plugins:
+#   - serverless-aws-latest-layer-version
